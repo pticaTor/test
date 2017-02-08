@@ -1,0 +1,965 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "LoRaWAN Server",
+    "version": "0.0.1"
+  },
+  "host": "192.168.0.102",
+  "basePath": "/api/v1",
+  "paths": {
+    "/application": {
+      "post": {
+        "description": "Use this operation to create a new application.\u003cbr\u003e\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Application"
+        ],
+        "summary": "Create a new application.",
+        "operationId": "createApplication",
+        "parameters": [
+          {
+            "description": "Application object to create.\n",
+            "name": "application",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created gateway.\n",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/application/{appid}": {
+      "get": {
+        "description": "Returns a application based on a single ID.",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Application"
+        ],
+        "summary": "Application",
+        "operationId": "findApplicationById",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of application to fetch",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "application response",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Use this operation to update a given application.\u003cbr\u003e\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Application"
+        ],
+        "summary": "Update an existing application.",
+        "operationId": "updateApplication",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Identifier of application to update.\n",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Application object to update.\n",
+            "name": "application",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated application.\n",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a single application based on the ID supplied",
+        "tags": [
+          "Application"
+        ],
+        "operationId": "deleteApplication",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of application to delete",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "application deleted"
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/application/{appid}/device": {
+      "post": {
+        "description": "Use this operation to create a new device.\u003cbr\u003e\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Device"
+        ],
+        "summary": "Create a new device.",
+        "operationId": "createDevice",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of application to fetch",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Device object to create.\n",
+            "name": "device",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created device.\n",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/application/{appid}/device{devid}": {
+      "get": {
+        "description": "Returns a device based on a single ID.",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Device"
+        ],
+        "summary": "Device",
+        "operationId": "findDeviceById",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of application to fetch",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "ID of device to fetch",
+            "name": "devid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "device response",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Use this operation to update a given device.\u003cbr\u003e\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Device"
+        ],
+        "summary": "Update an existing device.",
+        "operationId": "updateDevice",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Identifier of application to update.\n",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "Identifier of device to update.\n",
+            "name": "devid",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Application object to update.\n",
+            "name": "device",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated device.\n",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a single device based on the ID supplied",
+        "tags": [
+          "Device"
+        ],
+        "operationId": "deleteDevice",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of application to delete",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "ID of device to fetch",
+            "name": "devid",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "device deleted"
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/applications": {
+      "get": {
+        "description": "Get all user Applications\n",
+        "tags": [
+          "Applications"
+        ],
+        "summary": "Get applications list",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "page",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "per page",
+            "name": "perPage",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "sort",
+            "name": "sort",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of application",
+            "schema": {
+              "$ref": "#/definitions/Applications"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/applications{appid}/devices": {
+      "get": {
+        "description": "Get all user devices\n",
+        "tags": [
+          "Devices"
+        ],
+        "summary": "Get devices list",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of application to fetch",
+            "name": "appid",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "page",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "per page",
+            "name": "perPage",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "sort",
+            "name": "sort",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of devices",
+            "schema": {
+              "$ref": "#/definitions/Devices"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/gateway": {
+      "post": {
+        "description": "Use this operation to create a new gateway.\u003cbr\u003e Only the properties `MAC` and `EUI` are required.\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Create a new gateway.",
+        "operationId": "createGateway",
+        "parameters": [
+          {
+            "description": "Gateway object to create.\n",
+            "name": "gateway",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The created gateway.\n",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/gateway/{id}": {
+      "get": {
+        "description": "Returns a gateway based on a single ID.",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Gateway",
+        "operationId": "findGatewayById",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of gateway to fetch",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "gateway response",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Use this operation to update a given gateway.\u003cbr\u003e\n",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Gateway"
+        ],
+        "summary": "Update an existing gateway.",
+        "operationId": "updateGateway",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Identifier of gateway to update.\n",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Gateway object to update.\n",
+            "name": "gateway",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated gateway.\n",
+            "schema": {
+              "$ref": "#/definitions/Gateway"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a single gateway based on the ID supplied",
+        "tags": [
+          "Gateway"
+        ],
+        "operationId": "deleteGateway",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "ID of gateway to delete",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "gateway deleted"
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/gateways": {
+      "get": {
+        "description": "Get all user Gateways\n",
+        "tags": [
+          "Gateways"
+        ],
+        "summary": "Get gateways list",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "page",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "per page",
+            "name": "perPage",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "sort",
+            "name": "sort",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of gateway",
+            "schema": {
+              "$ref": "#/definitions/Gateways"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Application": {
+      "type": "object",
+      "properties": {
+        "cansend": {
+          "type": "boolean"
+        },
+        "deviceLimit": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "devices": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ogwinfo": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "overbosity": {
+          "type": "string"
+        },
+        "ownerid": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "tier": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tierStr": {
+          "type": "string"
+        }
+      }
+    },
+    "Applications": {
+      "type": "object",
+      "properties": {
+        "applications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Device": {
+      "type": "object",
+      "required": [
+        "id",
+        "devclass"
+      ],
+      "properties": {
+        "adr": {
+          "type": "boolean"
+        },
+        "adrCnt": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "appkey": {
+          "type": "string"
+        },
+        "appskey": {
+          "type": "string"
+        },
+        "devaddr": {
+          "type": "string"
+        },
+        "devclass": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "nwkskey": {
+          "type": "string"
+        },
+        "rxrate": {
+          "type": "string"
+        },
+        "seqdn": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seqdnreset": {
+          "type": "boolean"
+        },
+        "seqno": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seqq": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "seqrelax": {
+          "type": "boolean"
+        },
+        "subscription": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "txrate": {
+          "type": "string"
+        }
+      }
+    },
+    "Devices": {
+      "type": "object",
+      "properties": {
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "fields": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Gateway": {
+      "type": "object",
+      "required": [
+        "MAC",
+        "EUI"
+      ],
+      "properties": {
+        "EUI": {
+          "type": "string"
+        },
+        "MAC": {
+          "type": "string"
+        },
+        "alerts": {
+          "type": "boolean"
+        },
+        "base": {
+          "type": "string"
+        },
+        "bus": {
+          "type": "string"
+        },
+        "card": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "concentrator": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ignore": {
+          "type": "boolean"
+        },
+        "lastData": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lastStarted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "model": {
+          "type": "string"
+        },
+        "open": {
+          "type": "boolean"
+        },
+        "radioband": {
+          "type": "string"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "sw": {
+          "$ref": "#/definitions/Software"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "Gateways": {
+      "type": "object",
+      "properties": {
+        "gateways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Gateway"
+          }
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "format": "double"
+        },
+        "lon": {
+          "type": "number",
+          "format": "double"
+        },
+        "zip": {
+          "type": "string"
+        }
+      }
+    },
+    "Software": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "string"
+        },
+        "build": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bus": {
+          "type": "string"
+        },
+        "concentrator": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "latest": {
+          "type": "boolean"
+        },
+        "major": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "model": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
